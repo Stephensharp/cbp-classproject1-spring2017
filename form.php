@@ -1,38 +1,7 @@
 <?php
 
-// activate error reporting (for debugging)
-ini_set('display_errors', 'On');
-error_reporting(E_ALL);
-
-// basic definitions for the database functions
-define('DATA_DIR', 'data');
-define('NOTE_CLASS', 'note');
-define('PRIMARY_KEY', 'id');
-define('INDEX_DATA', ['title']);
-
-require('database.php');    // functions to access database
-require('html_helper.php'); // functions to generate HTML
-
-/* 
-available functions:
--------------------
-
-// database_please_get_index()
-// database_please_get_all_notes()
-// database_please_get_note($note_id)
-// database_please_save_note($note_object)
-// database_please_delete_note($pk)
-*/
-
-class note
-{
-    public $id = null;
-    public $title = null;
-    public $text = null;
-    public $category = null;
-    public $created_at = null;
-    public $updated_at = null;
-}
+// "boostrap" the application
+require 'bootstrap.php';
 
 // -------------------------------------------
 // end of preparation of project & environment
@@ -114,9 +83,16 @@ if(strlen($note->title) < 10)
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Form</title>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+    <nav>
+        <a href="<?php echo $note->getDetailUrl(); ?>">view this note</a>
+        <a href="list.php">list of notes</a>
+    </nav>
     
     <h1>The form</h1>
 
@@ -137,17 +113,15 @@ if(strlen($note->title) < 10)
         <label for="note_title">Title</label><br>
         <?php echo text_input('note[title]', $note->title, ['id' => 'note_title']); ?><br>
         <br>
+
         <label for="note_text">Text</label><br>
         <?php echo textarea('note[text]', $note->text, ['id' => 'note_text']); ?>
         <br>
 
+        <label>Category</label><br>
         <?php echo select('note[category]', $note_categories, $note->category); ?><br>
+        <br>
 
-        <?php echo text_input('note[created_at]', $note->created_at); ?><br>
-        <br>
-        <?php echo text_input('note[updated_at]', $note->updated_at); ?><br>
-        <br>
-        <?php echo select('note[author]', ['jan' => 'Jan'], null); ?><br>
         <input type="submit" value="Save" name="submit">
 
     </form>

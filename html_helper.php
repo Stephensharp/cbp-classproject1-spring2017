@@ -58,7 +58,9 @@ function hidden_input($name, $value, $attributes = [])
     return $html;
 }
 
-function select($name, $options, $value, $attributes = [])
+hidden_input('name', 'value', ['id' => 'an_id']);
+
+function select_old($name, $options, $value, $attributes = [])
 {
     $attributes_html = '';
     foreach($attributes as $attribute_name => $attribute_value)
@@ -87,15 +89,28 @@ function paragraph($content, $class)
     return '<p class="'.htmlspecialchars($class).'">'.$content.'</p>';
 }
 
-function option($label, $value)
+function option($label, $value, $is_selected = false)
 {
-    return '<option value="'.htmlspecialchars($value).'">'.$label.'</option>';
+    if($is_selected)
+    {
+        $selected_string = ' selected';
+    }
+    else
+    {
+        $selected_string = '';
+    }
+    return '<option value="'.htmlspecialchars($value).'" '.$selected_string.'>'.$label.'</option>';
+
+    // with ternary operator
+    return '<option value="' . htmlspecialchars($value) . '" ' . ($is_selected ? ' selected' : '') . '>' . $label           . '</option>';
+    //     '<option value="' . '1'                      . '" ' . 'selected'                        . '>' . 'Name of option' . '</option>'
 }
 
-echo option('First', 1); // <option value="1">First</option>
+// echo option('First', 1); // <option value="1">First</option>
 
-echo paragraph('Hello', 'first'); // <p class="first">Hello</p>
+// echo paragraph('Hello', 'first'); // <p class="first">Hello</p>
 
+// create a list of option
 $options = [
     0 => 'unknown',
     1 => 'Icecream',
@@ -103,10 +118,27 @@ $options = [
     3 => 'Pizza'
 ];
 
-?>
-What are we going to eat?<br>
-<select name="food">
+// determine the value to be selected
+$selected_value = 3;
+
+
+function select($name, $options, $selected_value)
+{
+    ?>
+
+<select name="<?php echo $name; ?>">
 
     <!-- options here -->
+    <?php foreach($options as $value => $name) : ?>
+
+        <?php echo option($name, $value, $value == $selected_value); ?>
+
+    <?php endforeach; ?>
 
 </select>
+
+    <?php
+}
+
+?>
+<?php // echo select('food', $options, $selected_value); ?>
