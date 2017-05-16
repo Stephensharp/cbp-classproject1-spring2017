@@ -16,10 +16,19 @@ nav.main a {
 }
 
 nav.left {
-    float: left;
+    width: 100%;
     margin-right: 1em;
     padding: 1em;
     background-color: #e7e7e7;
+    display: flex;
+    justify-content: left;
+}
+nav.left a {
+    margin: 0 1em;
+}
+
+h1 {
+    margin-top: 0.5em;
 }
 
 /* FORM */

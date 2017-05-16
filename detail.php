@@ -6,23 +6,17 @@ require 'bootstrap.php';
 // retrieve the note from database
 $note = database_please_get_note($_GET['id']);
 
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Note detail</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-</head>
-<body>
+$title = 'Detail of a note';
+?>
+<?php include 'header.php'; ?>
 
     <?php include 'nav.php'; ?>
-
+    
     <nav class="left">
         <a href="<?php echo $note->getEditUrl(); ?>">edit this note</a>
+        <a href="delete.php?id=<?php echo $note->id; ?>" 
+            onclick="if(!confirm('Do you really want to delete this?')) { return false; }">delete this note</a>
     </nav>
 
     <h1><?php echo $note->title; ?></h1>

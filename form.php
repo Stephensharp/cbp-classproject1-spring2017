@@ -83,24 +83,13 @@ if(strlen($note->title) < 10)
     $messages[] = 'WARNING: The title is too short';
 }
 
+$title = 'Edit note form';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Form</title>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+<?php include 'header.php'; ?>
 
     <?php include 'nav.php'; ?>
 
-    <?php if($note->id) : // display link to detail only for saved notes ?>
+    <?php if($note->id) : ?> <!-- display link to detail only for saved notes -->
         <nav class="left">
             <a href="<?php echo $note->getDetailUrl(); ?>">view this note</a>
         </nav>

@@ -6,19 +6,10 @@ require 'bootstrap.php';
 // retrieve all notes from database
 $notes = database_please_get_all_notes();
 
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>List of notes</title>
+$title = 'List of notes';
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-
-</head>
-<body>
+// include HTML header (ends with <body>)
+include 'header.php'; ?>
 
     <?php include 'nav.php'; ?>
 
@@ -36,6 +27,10 @@ $notes = database_please_get_all_notes();
             </li>
 
         <?php endforeach; ?>
+
+        <li>
+            <a href="form.php">create new note</a>
+        </li>
 
     </ul>
 
