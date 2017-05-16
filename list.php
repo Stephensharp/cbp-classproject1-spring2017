@@ -20,6 +20,8 @@ $notes = database_please_get_all_notes();
 </head>
 <body>
 
+    <?php include 'nav.php'; ?>
+
     <h1>List of notes</h1>
     
     <!-- display the retrieved notes -->

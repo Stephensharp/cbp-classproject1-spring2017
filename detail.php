@@ -19,9 +19,10 @@ $note = database_please_get_note($_GET['id']);
 </head>
 <body>
 
-    <nav>
+    <?php include 'nav.php'; ?>
+
+    <nav class="left">
         <a href="<?php echo $note->getEditUrl(); ?>">edit this note</a>
-        <a href="list.php">list of notes</a>
     </nav>
 
     <h1><?php echo $note->title; ?></h1>

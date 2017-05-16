@@ -28,7 +28,7 @@ if( !empty($_GET['id']) ) { // if( isset($_GET['id']) && $_GET['id'] ) {
         // in that case: error 404, page not found
         header("HTTP/1.0 404 Not Found");
     }
-    var_dump($note);
+
 } else {
     // create new note
     $note = new note();
@@ -57,14 +57,23 @@ if($_POST)
     if($valid) // is the status still valid (ie. no validation conditions failed)
     {
         // update the dates
-        $note->created_at = date('Y-m-d H:i:s');
+        if(!$note->id) // if the note has not been saved yet
+        {
+            // update the created_at datetime
+            $note->created_at = date('Y-m-d H:i:s');
+        }
+        // always: update the updated_at datetime
         $note->updated_at = date('Y-m-d H:i:s');
 
         // SAVE UPDATED DATA
-        database_please_save_note($note);
+        $saved_note_id = database_please_save_note($note);
+        
+        // update the $note object with the id so now it looks like
+        // a saved note
+        $note->id = $saved_note_id;
 
-        // REDIRECT
-        header('Location: form.php');
+        // REDIRECT (to editing of this note)
+        header('Location: '.$note->getEditUrl());
         exit(); // end the script after redirection (should not be necessary)
     }
 }
@@ -89,10 +98,13 @@ if(strlen($note->title) < 10)
 </head>
 <body>
 
-    <nav>
-        <a href="<?php echo $note->getDetailUrl(); ?>">view this note</a>
-        <a href="list.php">list of notes</a>
-    </nav>
+    <?php include 'nav.php'; ?>
+
+    <?php if($note->id) : // display link to detail only for saved notes ?>
+        <nav class="left">
+            <a href="<?php echo $note->getDetailUrl(); ?>">view this note</a>
+        </nav>
+    <?php endif; ?>
     
     <h1>The form</h1>
 
