@@ -50,3 +50,11 @@ textarea {
     border: 1px solid silver;
     background-color: #e7e7e7;
 }
+
+.page-content {
+    margin: 0 2em;
+}
+
+.note-detail .text {
+    margin-top: 1em;
+}

@@ -22,7 +22,7 @@ $messages = []; // messages to be displayed to the user
 // if there was id in GET parameters
 if( !empty($_GET['id']) ) { // if( isset($_GET['id']) && $_GET['id'] ) {
     // retrieve existing note
-    $note = database_please_get_note($_GET['id']);
+    $note = mysql_please_get_note($_GET['id']);
     if(!$note) { // the note should have been retrieved
         // if it wasn't retrived, something went wrong - the note does not exist
         // in that case: error 404, page not found
@@ -43,8 +43,8 @@ if($_POST)
     $note_array = $_POST['note'];
 
     // UPDATE THE RETRIEVED DATA WITH SUBMITTED DATA
-    $note->title = $note_array['title'];
-    $note->text = $note_array['text'];
+    $note->setTitle($note_array['title']);
+    $note->setText($note_array['text']);
 
     // IS THE UPDATED DATA VALID?
     $valid = true; // assume that everything is fine

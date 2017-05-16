@@ -21,7 +21,7 @@ include 'header.php'; ?>
         <?php foreach($notes as $note) : ?>
 
             <li>
-                <?php echo $note->title; ?>
+                <?php echo $note->getTitle(); ?>
                 <a href="<?php echo $note->getDetailUrl(); ?>">detail</a>
                 <a href="<?php echo $note->getEditUrl(); ?>">edit</a>
             </li>
