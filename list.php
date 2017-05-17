@@ -4,7 +4,7 @@
 require 'bootstrap.php';
 
 // retrieve all notes from database
-$notes = database_please_get_all_notes();
+$notes = db::get_all_notes();
 
 $title = 'List of notes';
 

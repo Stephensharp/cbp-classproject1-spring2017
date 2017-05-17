@@ -22,7 +22,8 @@ $messages = []; // messages to be displayed to the user
 // if there was id in GET parameters
 if( !empty($_GET['id']) ) { // if( isset($_GET['id']) && $_GET['id'] ) {
     // retrieve existing note
-    $note = mysql_please_get_note($_GET['id']);
+    $note = db::get_note($_GET['id']);
+    var_dump($note);
     if(!$note) { // the note should have been retrieved
         // if it wasn't retrived, something went wrong - the note does not exist
         // in that case: error 404, page not found
