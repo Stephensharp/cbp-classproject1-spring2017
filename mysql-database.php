@@ -28,6 +28,9 @@ class db
                 echo 'Connection failed: ' . $e->getMessage();
             }
 
+            // set level of error reporting
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
             // put the created PDO connection into static property
             static::$pdo = $pdo;
         }
@@ -82,7 +85,7 @@ class db
         $statement = $pdo->prepare($query);
 
         // 4. execute the query and get the result
-        $statement->execute([$note_id]);
+        $statement->execute();
 
         $statement->setFetchMode(PDO::FETCH_CLASS, 'note');
 
